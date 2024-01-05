@@ -3,13 +3,19 @@ const Header = (props) => {
   return <h1>{props.course}</h1>;
 };
 
+const Part = (props) => {
+  return (
+    <p>
+      {props.part.partTitle} {props.part.exercisesCount}
+    </p>
+  );
+}
+
 const Content = (props) => {
   return (
     <div>
-      {props.parts.map((element) => (
-        <p key={element.partTitle}>
-          {element.partTitle} {element.exercisesCount}
-        </p>
+      {props.parts.map((part) => (
+        <Part key={part.partTitle.replace(' ')} part={part} />
       ))}
     </div>
   );
