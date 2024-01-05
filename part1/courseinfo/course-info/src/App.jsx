@@ -1,4 +1,7 @@
 /* eslint-disable react/prop-types */
+
+import { useState } from "react";
+
 const Header = (props) => {
   return <h1>{props.course}</h1>;
 };
@@ -30,6 +33,27 @@ const Total = (props) => {
   );
 };
 
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
+
+const Display = ({ counter }) => <div>Counter: {counter}</div>;
+
+const Counter = () => {
+  const [counter, setCounter] = useState(0);
+
+  const increaseByOne = () => setCounter(counter + 1);
+  const decreaseByOne = () => setCounter(counter - 1);
+  const setToZero = () => setCounter(0);
+
+  return (
+    <>
+      <Display counter={counter} />
+      <Button onClick={increaseByOne} text="+" />
+      <Button onClick={decreaseByOne} text="-" />
+      <Button onClick={setToZero} text="0" />
+    </>
+  );
+};
+
 const App = () => {
   const course = {
     name: "Half Stack application development",
@@ -47,14 +71,15 @@ const App = () => {
         exercises: 14,
       },
     ],
-  }
+  };
 
   return (
-    <div>
+    <>
       <Header course={course.name} />
       <Content parts={course.parts} />
       <Total label="Number of exercises" parts={course.parts} />
-    </div>
+      <Counter />
+    </>
   );
 };
 
