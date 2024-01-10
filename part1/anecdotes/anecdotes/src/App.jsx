@@ -6,6 +6,18 @@ const generateRandomNumber = (min, max) =>
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
+const AnecdotesSummary = ({ anecdotes, votes }) => {
+  const mostVotedAnecdoteIndex = votes.indexOf(Math.max(...votes));
+  return (
+    <>
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[mostVotedAnecdoteIndex]}
+      <br />
+      has {votes[mostVotedAnecdoteIndex]} votes
+    </>
+  );
+}
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -45,6 +57,7 @@ const App = () => {
       <br />
       <Button onClick={handleVote} text="vote" />
       <Button onClick={handleNextAnecdote} text="next Anecdote" />
+      <AnecdotesSummary anecdotes={anecdotes} votes={votes} />
     </div>
   );
 };
